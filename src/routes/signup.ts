@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { signupValidator } from "../schemas/signup-schema";
-import { insertUser } from "../db/queries";
+import { getUserByEmail, insertUser } from "../db/queries";
 import { dbConn } from "../db/db";
 import { generateJwtToken } from "../helper/jwt-helper";
 
@@ -9,7 +9,7 @@ import { cookieOpts } from "../helper/cookie-helper";
 
 const signup = new Hono();
 
-signup.post("/api/signup", signupValidator, async (c) => {
+signup.post("/", signupValidator, async (c) => {
   const db = dbConn();
 
   // validate the users input

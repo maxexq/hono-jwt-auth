@@ -1,8 +1,8 @@
 import type { Hono } from "hono";
 import { logger } from "hono/logger";
 
-import signin from "./signin";
 import { dbConn } from "../db/db";
+import signin from "./signin";
 import signup from "./signup";
 
 export const routes = (app: Hono) => {
@@ -20,6 +20,6 @@ export const routes = (app: Hono) => {
 
   app.get("/", (c) => c.text("Simply JWT Auth API"));
 
-  app.route("/", signin);
-  app.route("/", signup);
+  app.route("/api/signin", signin);
+  app.route("/api/signup", signup);
 };

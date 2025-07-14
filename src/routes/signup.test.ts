@@ -4,23 +4,23 @@ import app from "../";
 import { mockDbConn } from "../test/test-db";
 import { signupReq } from "../test/test-helper";
 
+let db: Database;
+
+mock.module("../db/db.ts", () => {
+  return {
+    dbConn: () => db,
+  };
+});
+
+beforeEach(() => {
+  db = mockDbConn();
+});
+
+afterEach(() => {
+  db.close();
+});
+
 describe("Signup Route", () => {
-  let db: Database;
-
-  mock.module("../db/db.ts", () => {
-    return {
-      dbConn: () => db,
-    };
-  });
-
-  beforeEach(() => {
-    db = mockDbConn();
-  });
-
-  afterEach(() => {
-    db.close();
-  });
-
   it("should return success message on valid signup", async () => {
     const mockEmail = "test@test.com";
 
