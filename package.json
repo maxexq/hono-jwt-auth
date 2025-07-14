@@ -1,7 +1,8 @@
 {
   "name": "hono-basic-jwt-auth",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.0",

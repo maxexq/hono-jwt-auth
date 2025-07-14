@@ -38,3 +38,17 @@ export const getUserByEmail = async (db: Database, email: string) => {
 
   return user;
 };
+
+export const getUserById = async (db: Database, userId: UUID) => {
+  const query = db.query(
+    `
+    SELECT id, email 
+    FROM users 
+    WHERE id = ?
+    `
+  );
+
+  const user = query.get(userId) as { id: UUID; email: string } | undefined;
+
+  return user;
+};

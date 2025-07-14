@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { signupValidator as signinValidator } from "../schemas/signup-schema";
-import { getUserByEmail, insertUser } from "../db/queries";
+import { getUserByEmail } from "../db/queries";
 import { dbConn } from "../db/db";
 import { generateJwtToken } from "../helper/jwt-helper";
 
@@ -15,20 +15,14 @@ signin.post("/", signinValidator, async (c) => {
   //validate the user's input
   const { email, password } = c.req.valid("json");
 
-  console.log("password:", password);
-
   try {
     // query user by email
     const user = await getUserByEmail(db, email);
-
-    console.log("User found:", user);
 
     // if user does not exist, return error 401
     if (!user) {
       return c.json({ errors: ["Invalid credentials"] }, 401);
     }
-
-    console.log("User found with password hash:", user.password_hash);
 
     // verify password match
     const passwordMatch = await Bun.password.verify(

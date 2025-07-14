@@ -1,6 +1,8 @@
 import { describe, expect, it, beforeEach, afterEach, mock } from "bun:test";
-import { Database } from "bun:sqlite";
 import app from "../";
+
+import { Database } from "bun:sqlite";
+
 import { mockDbConn } from "../test/test-db";
 import { signupReq } from "../test/test-helper";
 

@@ -29,3 +29,12 @@ export const signinReq = (
     }),
   });
 };
+
+export const signoutReq = () => {
+  return new Request("http://localhost:3000/api/signout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
